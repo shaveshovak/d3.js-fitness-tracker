@@ -1,3 +1,3 @@
-# fitness-tracker
+# Fitness-tracker
 
 URL: https://shaveshovak.github.io/fitness-tracker/
