@@ -16,6 +16,29 @@ btns.forEach(btn => {
         btns.forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
 
+        // Set id of input field
+        input.setAttribute('id', activity);
+
+        // Set text of form span
+        formAct.textContent = activity;
         
-    })
+    });
+});
+
+form.addEventListener('submit', e => {
+    // prevent default actions
+    e.preventDefault();
+
+    const distance = parseInt(input.value);
+    if(distance){
+        db.collection('activities').add({
+            distance, activity,
+            data: new Date().toString()
+        }).then(() => {
+            error.textContent = '';
+            input.value = '';
+        })
+    } else{
+        error.textContent = 'Please enter a valid distance';
+    }
 });
