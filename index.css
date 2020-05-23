@@ -27,3 +27,11 @@ button.active{
 form span{
     color: #00bfa5 !important;
 }
+.x-axis path, .y-axis path,
+.x-axis line, .y-axis line{
+    stroke: #cccccc;
+}
+.x-axis text, .y-axis text{
+    fill: #cccccc;
+    font-size: 14px;
+}
