@@ -24,15 +24,34 @@ const xAxisGroup = graph.append('g')
 const yAxisGroup = graph.append('g')
     .attr('class', 'y-axis');
 
+// d3 line path generator
+const line = d3.line()
+    .x(function(d){
+        return x(new Date(d.data))})
+    .y(function(d){
+        return y(d.distance)});
+
+// line path element
+const path = graph.append('path');
+
 const update = (data) => {
 
-    // 
     data = data.filter(item => item.activity == activity);
+
+    // sort data based on data obejcts
+    data.sort((a, b) => new Date(a.data) - new Date(b.data));
 
     // set scale domains
     x.domain(d3.extent(data, d => new Date(d.data)));
     y.domain([0, d3.max(data, d => d.distance)]);
 
+    // update path data
+    path.data([data])
+        .attr('fill', 'none')
+        .attr('stroke', '#00bfa5')
+        .attr('stroke-width', 2)
+        .attr('d', line);
+    
     // create circles for objects
     const circles = graph.selectAll('circle')
         .data(data);
